@@ -94,7 +94,7 @@ for epoch_i in range(0, settings["epochs"]):
     # Reset the total loss for this epoch.
     total_train_loss = 0
 
-    # Put the model into training mode. Don't be mislead--the call to 
+    # Put the model into training mode
     model.train()
 
     # For each batch of training data
