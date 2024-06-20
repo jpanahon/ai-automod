@@ -22,7 +22,7 @@ df = pd.read_csv(
     "./data/train.csv",
     delimiter=",",
     header=None,
-    names=["id", "sentence", "toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
+    names=["sentence", "toxic"]
 )
 
 inputs = []
@@ -37,14 +37,15 @@ for _, row in df.iterrows():
     encoded_dict = tokenizer.encode_plus(
         row["sentence"],              # Sentence to encode.
         add_special_tokens = True,    # Add '[CLS]' and '[SEP]'
-        max_length = 64,              # Pad & truncate all sentences.
+        max_length = 128,              # Pad & truncate all sentences.
+        truncation=True,
         pad_to_max_length = True,
         return_attention_mask = True, # Construct attn. masks.
         return_tensors = 'pt',        # Return pytorch tensors.
     )
     inputs.append(encoded_dict['input_ids'])
     attn_masks.append(encoded_dict['attention_mask'])
-    targets.append(int(row["toxic"]) | int(row["severe_toxic"]) | int(row["obscene"]) | int(row["threat"]) | int(row["insult"]) | int(row["identity_hate"]))
+    targets.append(int(row["toxic"]))
 
 inputs = torch.cat(inputs, dim=0)
 attn_masks = torch.cat(attn_masks, dim=0)
@@ -218,3 +219,4 @@ print(training_stats)
 # Save model
 
 torch.save(model.state_dict(), "./model/model.pt")
+z
