@@ -219,4 +219,3 @@ print(training_stats)
 # Save model
 
 torch.save(model.state_dict(), "./model/model.pt")
-z
