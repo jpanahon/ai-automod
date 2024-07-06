@@ -12,3 +12,5 @@ We do not allow:
 Our moderation team is committed to upholding these regulations and ensuring we maintain a respectful and positive environment for everyone. In order to assist with these efforts, we are employing an AI powered sentiment analyzer that will flag potentially problematic messages for us. It's a BERT finetune, and its training pipeline is contained within this repository.
 
 Disclaimer: The dataset in this repository contains NSFW and offensive content.
+
+To download our pretrained model: https://drive.google.com/file/d/1zH6KJqPkyujFv_2yo_P_lYJMYtZ72Irj/view?usp=drive_link
