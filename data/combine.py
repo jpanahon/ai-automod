@@ -6,8 +6,13 @@ import csv
 # Get all CSV files in the data directory
 input_files = ["./data/" + file for file in os.listdir("./data/") if file.endswith('.csv')]
 
-# Write to a unified "corpus.csv" file
+# Write to a unified "train.csv" file
 output_file = "./data/train.csv"
+
+# Delete the existing train.csv file if it exists
+if os.path.exists(output_file):
+    os.remove(output_file)
+    print(f"Deleted existing {output_file}")
 
 try:
     # Read and concatenate all CSV files
@@ -16,6 +21,9 @@ try:
 
     # Fill NaN values with 0
     concatenated_df.fillna(0, inplace=True)
+
+    # Randomly shuffle the data
+    concatenated_df = concatenated_df.sample(frac=1).reset_index(drop=True)
 
     # Write the concatenated DataFrame to a new CSV file
     concatenated_df.to_csv(output_file, index=False, quoting=csv.QUOTE_ALL)
